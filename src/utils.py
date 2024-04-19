@@ -44,17 +44,17 @@ def load_obj(file_path):
         raise CustomException(e, sys)
 
 
-def establish_connection(host, user, password, database):
-    mydb = connection.connect(host='localhost', user='root', password='', use_pure=True)
-    query = 'create database diamondproject;'
+def establish_connection(host, user_name, password, Database_name):
+    mydb = connection.connect(host=host, user=user_name, password=password, use_pure=True)
+    query = f"create database {Database_name};"
     cursor = mydb.cursor()
     cursor.execute(query)
+    print('created successfully')
 
 
-def retrieve_data(host,user_name,password,Database_name):
-    df = pd.DataFrame(pd.read_csv(r"C:\Users\abhis\Documents\ThirdEyeData_local\LearningPath\Internship\Code\pipelineproject\notebooks\data\gemstone.csv"))
-    engine = create_engine(f"mysql://{user_name}:{password}@{host}/{Database_name}")
-    # engine = create_engine(f'mysql://{"root"}:{""}@{"localhost"}/{"diamondproject"}')
+def retrieve_data(host, user_name, password, Database_name):
+    df = pd.DataFrame(pd.read_csv(r"notebook\data\flight_price.csv"))
+    engine = create_engine(f"mysql+mysqlconnector://{user_name}:{password}@{host}/{Database_name}")
     table_name = "flightpricedata"
     try:
         df.to_sql(name=table_name, con=engine, if_exists='append', index=False)
@@ -62,5 +62,5 @@ def retrieve_data(host,user_name,password,Database_name):
     except Exception as e:
         logging.info("Error in retrieve function in utils")
         raise CustomException(e, sys)
-    query = f"SELECT * From {Database_name}"
+    query = f"SELECT * From {table_name}"
     df1 = pd.read_sql(query, engine)

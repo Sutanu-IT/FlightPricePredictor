@@ -1,0 +1,151 @@
+<html>
+<head>
+    <title>Flight Booking Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select, input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 20px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        h2 {
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;        /* sets the text color */
+            font-family: 'Arial';  /* sets the font type */
+            text-align: center;    /* centers the text */
+            margin-top: 20px;      /* adds space above the h1 */
+            margin-bottom: 20px;   /* adds space below the h1 */
+        }
+    </style>
+</head>
+<body>
+<h1>Flight Price Predictor:</h1>
+<form action="{{url_for('predict_datapoint')}}" method="POST">
+   
+    <div class="form-group">
+        <label for="airline">Airline:</label>
+        <select id="airline" name="airline">
+            <option value="SpiceJet" >SpiceJet</option>
+            <option value="AirAsia">AirAsia</option>
+            <option value="GO_FIRST">GO_FIRST</option>
+            <option value="Indigo">Indigo</option>
+            <option value="Air_India">Air_India</option>
+            <option value="Vistara">Vistara</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="source_city">Source City:</label>
+        <select id="source_city" name="source_city">
+            <option value="Chennai" >Chennai</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Delhi">Delhi</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="destination_city">Destination City:</label>
+        <select id="destination_city" name="destination_city">
+            <option value="Chennai" >Chennai</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Mumbai">Mumbai</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="departure_time">Departure Time:</label>
+        <select id="departure_time" name="departure_time">
+	    <option value="Early_Morning">Early Morning</option>
+	    <option value="Morning">Morning</option>
+            <option value="Afternoon">Afternoon</option>
+	    <option value="Evening">Evening</option>
+            <option value="Night">Night</option>
+            <option value="Late_Night" >Late Night</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="arrival_time">Arrival Time:</label>
+        <select id="arrival_time" name="arrival_time">
+            <option value="Early_Morning">Early Morning</option>
+	    <option value="Morning">Morning</option>
+            <option value="Afternoon">Afternoon</option>
+	    <option value="Evening">Evening</option>
+            <option value="Night">Night</option>
+            <option value="Late_Night" >Late Night</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="class">Class:</label>
+        <select id="class" name="class">
+            <option value="Business" >Business</option>
+            <option value="Economy">Economy</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="stops">Stops:</label>
+        <select id="stops" name="stops">
+            <option value="zero">Zero</option>
+            <option value="one">One</option>
+	    <option value="two_or_more" >Two or More</option>
+        </select>
+    </div>
+
+ <div class="form-group">
+        <label for="days_left">Days left:</label>
+        <input type="text" id="days_left" name="days_left" placeholder="Enter the days_left before journey date(1-49) (int)">
+    </div>
+    <!-- <div class="form-group">
+        <label for="days_left">Days Left:</label>
+        <input type="range" id="days_left" name="days_left" min="1" max="49" value="1" oninput="this.nextElementSibling.value = this.value">
+        <output>1</output>
+    </div> -->
+
+
+<div style="clear:both;"></div>
+  <input type="submit" value="Submit">
+
+  <h1>Estimated price : {{final_result}}</h1>
+</form>
+</body>
+</html>

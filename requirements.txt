@@ -4,4 +4,6 @@ flask
 scikit-learn
 seaborn
 datetime
+mysql_connector
+sqlalchemy
 -e .
